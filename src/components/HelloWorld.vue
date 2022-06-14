@@ -23,6 +23,7 @@
         change-on-select
     />
   </div>
+  <div style="margin-top: 10px"><a-input v-model:value="detail" placeholder="请输入详细地址" style="width: 80%"/></div>
   <div style="margin-top: 10px">
     <h3>已选择的地址:<span style="color: royalblue;margin-left: 20px">{{ addr }}</span></h3>
   </div>
@@ -44,6 +45,7 @@ export default {
     return {
       options: null,
       value: [],
+      detail:""
     }
   },
   created() {
@@ -52,6 +54,7 @@ export default {
         .then((res) => {
           ths.options = (res || []);
           ths.options.forEach(item => item.isLeaf = false);
+          ths.value = ["52"]
           console.log(ths.options)
 
         }).catch(err => {
@@ -118,7 +121,7 @@ export default {
           s.push(curOption.name);
         curOptions = curOption.children || [];
       }
-      return s.join("");
+      return s.join("") + this.detail;
     },
   }
 

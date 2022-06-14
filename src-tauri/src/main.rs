@@ -23,7 +23,8 @@ lazy_static! {
 
 #[tauri::command]
 async fn all_provinces() -> Vec<Province> {
-    RB.fetch_list().await.unwrap()
+    let w = RB.new_wrapper().eq("code", "52");
+    RB.fetch_list_by_wrapper(w).await.unwrap()
 }
 
 #[tauri::command]
